@@ -40,12 +40,12 @@ export default {
       pluginId: pluginId,
       type: "string", // the icon will be stored JSON object stringified
       intlLabel: {
-        id: "heroicons-field.icon-picker.label",
+        id: "tablericons-field.icon-picker.label",
         defaultMessage: "Icon",
       },
       intlDescription: {
-        id: "heroicons-field.icon-picker.description",
-        defaultMessage: "Select a heroicon",
+        id: "tablericons-field.icon-picker.description",
+        defaultMessage: "Select a tablericon",
       },
       icon: PluginIcon,
       components: {
@@ -63,11 +63,11 @@ export default {
                 name: 'required',
                 type: 'checkbox',
                 intlLabel: {
-                  id: 'heroicons-field.options.advanced.requiredField',
+                  id: 'tablericons-field.options.advanced.requiredField',
                   defaultMessage: 'Required field',
                 },
                 description: {
-                  id: 'heroicons-field.options.advanced.requiredField.description',
+                  id: 'tablericons-field.options.advanced.requiredField.description',
                   defaultMessage: "You won't be able to create an entry if this field is empty",
                 },
               },

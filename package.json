@@ -1,30 +1,31 @@
 {
-  "name": "strapi-plugin-heroicons-field",
+  "name": "strapi-plugin-tablericons-field",
   "version": "0.0.3",
-  "description": "Strapi plugin. Adds a heroicon picker custom field to your content types. Returns the svg and the name of the icon as a stringyfied JSON object.",
+  "description": "Strapi plugin. Adds a tablericon picker custom field to your content types. Returns the svg and the name of the icon as a stringyfied JSON object.",
   "strapi": {
-    "name": "heroicons-field",
-    "description": "Add a heroicon picker custom field to your content types.",
+    "name": "tablericons-field",
+    "description": "Add a tablericon picker custom field to your content types.",
     "kind": "plugin",
-    "displayName": "Heroicons Field"
+    "displayName": "tablericons Field"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rgomeztinoco/strapi-plugin-heroicons-field"
+    "url": "https://github.com/mvandenbos/strapi-plugin-tabler-field"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18"
+    "@tabler/icons-webfont": "^2.34.0",
+    "react": ">= 16",
+    "react-svg-wrapper": "^0.5.6"
   },
   "peerDependencies": {
     "@strapi/strapi": "^4.0.0"
   },
   "author": {
-    "name": "Ricardo Gomez @rgomeztinoco"
+    "name": "M VandenBos @mvandenbos"
   },
   "maintainers": [
     {
-      "name": "Ricardo Gomez @rgomeztinoco",
-      "email": "rgomeztinoco@protonmail.com"
+      "name": "mvandenbos @mvandenbos"
     }
   ],
   "engines": {
@@ -35,9 +36,11 @@
   "keywords": [
     "strapi",
     "strapi plugin",
-    "heroicons",
+    "tablericons",
     "strapi custom field",
     "strapi icons",
-    "strapi heroicons"
+    "strapi tablericons",
+    "strapi tabler",
+    "strapi tabler icons"
   ]
 }

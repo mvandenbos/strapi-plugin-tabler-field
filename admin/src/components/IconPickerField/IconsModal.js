@@ -1,10 +1,10 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
-import { renderToString } from 'react-dom/server';
+import React,  { useState, useEffect ,SVGSVGElement, } from 'react';
+import { renderToString, renderToStaticMarkup} from 'react-dom/server';
+import SVGWrapper from "react-svg-wrapper";
+
 import {
   Button,
-  SingleSelect,
-  SingleSelectOption,
   SearchForm,
   Searchbar,
   Typography,
@@ -13,9 +13,9 @@ import {
   ModalBody,
   ModalFooter,
 } from '@strapi/design-system';
-import * as miniIcons from '@heroicons/react/20/solid';
-import * as outlineIcons from '@heroicons/react/24/outline';
-import * as solidIcons from '@heroicons/react/24/solid';
+
+import * as tablerIcons from '../../../../node_modules/@tabler/icons/dist/esm/tabler-icons.js';
+
 import styled from 'styled-components';
 
 const IconWraper = styled.button`
@@ -25,18 +25,23 @@ const IconWraper = styled.button`
 `;
 
 const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef }) => {
-  const [selectedIconLibrary, setSelectedIconLibrary] = useState('outline');
+  const [selectedIconLibrary, setSelectedIconLibrary] = useState('icons');
   const [query, setQuery] = useState('');
   const [filteredIcons, setFilteredIcons] = useState([]);
   const iconsLib = {
-    outline: outlineIcons,
-    solid: solidIcons,
-    mini: miniIcons,
+    icons: tablerIcons
   };
+  
+  const ParseIconNameToDashCase = function (camel) {
+    return camel.replace(/(^Icon)/gi, "").replace(/[A-Z]/g, (match, offset) => (offset > 0 ? '-' : '') + match.toLowerCase())
+  }
 
   // search logic
   useEffect(() => {
-    const icons = Object.entries(iconsLib[selectedIconLibrary]);
+    const icons = Object.entries(iconsLib[selectedIconLibrary]).map(icon => {
+      let iconname = ParseIconNameToDashCase(icon[0])
+      return [iconname, icon[1]]
+    })
     if (!query) return setFilteredIcons(icons);
 
     const filtered = icons.filter(([iconName]) =>
@@ -73,7 +78,7 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
             onClick={() => {
               setSelectedIcon({
                 name: iconName,
-                component: renderToString(<Icon />),
+                component: Icon()              
               });
               onChange({
                 target: {
@@ -81,33 +86,21 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
                   type: 'string',
                   value: JSON.stringify({
                     name: iconName,
-                    component: renderToString(<Icon />),
-                  }),
+                    component: Icon()
+                  })
                 },
               });
               closeModal();
             }}
-          >
-            <Icon
-              title={iconName}
-              height={selectedIconLibrary === 'mini' ? '20px' : '24px'}
-            />
+          > 
+          <SVGWrapper
+            src={Icon()}
+            type="string"
+          />
           </IconWraper>
         ))}
       </ModalBody>
       <ModalFooter
-        startActions={
-          <SingleSelect
-            minWidth={600}
-            required={0}
-            value={selectedIconLibrary}
-            onChange={setSelectedIconLibrary}
-          >
-            <SingleSelectOption value="outline">Outline</SingleSelectOption>
-            <SingleSelectOption value="solid">Solid</SingleSelectOption>
-            <SingleSelectOption value="mini">Mini</SingleSelectOption>
-          </SingleSelect>
-        }
         endActions={
           <>
             {/* <Button variant="secondary">Add new stuff</Button> */}
