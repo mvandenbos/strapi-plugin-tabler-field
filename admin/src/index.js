@@ -38,7 +38,7 @@ export default {
     app.customFields.register({
       name: "icon-picker",
       pluginId: pluginId,
-      type: "string", // the icon will be stored JSON object stringified
+      type: "text", // the icon will be stored JSON object stringified
       intlLabel: {
         id: "tablericons-field.icon-picker.label",
         defaultMessage: "Icon",
